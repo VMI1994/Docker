@@ -8,8 +8,8 @@ sudo apt install -y wget
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
 sudo dpkg -i docker-desktop-amd64.deb
 sudo rm /etc/xdg/systemd/user/docker-desktop.service
-sudo systemctl --user enable docker-desktop
 sudo apt --fix-broken install -y
+sudo systemctl --user enable docker-desktop
 clear
 echo "start Docker desktop and wait for startup to complete before hitting enter to continue"
 read pause
