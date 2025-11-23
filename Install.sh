@@ -13,86 +13,11 @@ echo "2. Docker Desktop for GUI enviroments"
 read choice
 if [ $choice = "1" ]
 then
+    bash headless.sh
     echo "Headless"
     exit
 elif [ $choice = "2" ]
 then
-    echo "Desktop"
+    bash desktop.sh
     exit
 fi
-exit
-
-
-
-# Install Docker
-if [ $? == 1 ]
-then
-    clear
-    echo "Installing Docker"
-    sleep 2
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    bash get-docker.sh
-fi
-
-if [ $? == 0 ]
-then
-    sudo apt install -y wget
-    wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
-    sudo apt install -y ./docker-desktop-amd64.deb
-    sudo rm /etc/xdg/systemd/user/docker-desktop.service
-    sudo systemctl --user enable docker-desktop
-    clear
-    echo "start Docker desktop an wait for startup to complete before hitting enter to continue"
-    read pause
-fi
-
-# Enable and start Docker
-clear
-echo "Enabling and starting docker"
-sleep 2
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo service docker start
-sudo service docker enable
-sudo usermod -aG docker $USER
-
-# Install portainer and watchtower
-clear
-echo "Install portainer and watchtower"
-sleep 2
-sudo docker volume create portainer_data
-sudo docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-clear
-sudo docker run  -d -v /var/run/docker.sock:/var/run/docker.sock --name watchtower containrrr/watchtower
-
-# Option to install open-webui and ollama
-clear
-echo "Do you want to install Artificial Intelligence (y/N)"
-read option
-if [ $option == "y" ]
-then
-    sudo docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
-    sudo docker exec -it open-webui ollama pull gemma3:1b
-    clear && "OpenWebUI is available at http://127.0.0.1:3000"
-fi
-
-# Check Containers
-clear
-echo ""
-echo ""
-echo "We will now check running docker containers"
-sleep 2
-sudo docker ps
-echo ""
-echo ""
-
-# Check install
-which docker > /dev/null
-if [ $? == 0 ]
-then
-  echo "Docker Install Successful"
-else
-  echo "Docker Install Failed"
-fi
-sleep 2
-exit
