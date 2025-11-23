@@ -6,14 +6,30 @@ echo "Press enter to begin or ctrl+c to exit"
 read junk
 
 # Install curl
-sudo apt install -y curl
+sudo apt install -y curl neofetch
+
+# Which docker to install
+clear
+neofetch | grep DE
 
 # Install Docker
-clear
-echo "Installing Docker"
-sleep 2
-curl -fsSL https://get.docker.com -o get-docker.sh
-bash get-docker.sh
+if [ $? == 1 ]
+then
+    clear
+    echo "Installing Docker"
+    sleep 2
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    bash get-docker.sh
+else
+    sudo apt install -y wget
+    wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
+    sudo apt install -y ./docker-desktop-amd64.deb
+    sudo rm /etc/xdg/systemd/user/docker-desktop.service
+    sudo systemctl --user enable docker-desktop
+    clear
+    echo "start Docker desktop an wait for startup to complete before hitting enter to continue"
+    read pause
+fi
 
 # Enable and start Docker
 clear
@@ -24,20 +40,6 @@ sudo systemctl start docker
 sudo service docker start
 sudo service docker enable
 sudo usermod -aG docker $USER
-
-# Install docker desktop if gui present
-ls /usr/bin/*session > /dev/null
-if [ $? == 0 ]
-then
-    sudo apt install -y wget
-    wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
-    sudo apt install -y ./docker-desktop-amd64.deb
-    sudo rm /etc/xdg/systemd/user/docker-desktop.service
-    sudo systemctl --user enable docker-desktop
-    clear
-    echo "start Docker desktop an wait for startup to complete before hitting enter to continue"
-    read pause
-fi
 
 # Install portainer and watchtower
 clear
