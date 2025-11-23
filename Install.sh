@@ -20,6 +20,9 @@ then
     echo "Desktop"
     exit
 fi
+exit
+
+
 
 # Install Docker
 if [ $? == 1 ]
