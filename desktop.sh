@@ -26,11 +26,6 @@ sudo apt --fix-broken install -y
 sudo rm /etc/xdg/systemd/user/docker-desktop.service
 sudo systemctl --user enable docker-desktop
 sudo docker context use desktop-linux
-clear
-echo "start Docker desktop and wait for startup to complete before hitting enter to continue"
-read pause
-
-# Enable and start Docker
 sudo usermod -aG docker $USER
 
 # Check install
