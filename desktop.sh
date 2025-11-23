@@ -1,5 +1,9 @@
 #!/bin/bash
 
+clear
+sudo apt install -y curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+bash get-docker.sh
 sudo apt install -y wget
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
 sudo dpkg -i docker-desktop-amd64.deb
