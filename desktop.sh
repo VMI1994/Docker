@@ -1,9 +1,26 @@
 #!/bin/bash
 
 clear
-sudo apt install -y curl wget
-curl -fsSL https://get.docker.com -o get-docker.sh
-bash get-docker.sh
+sudo apt install -y curl wget ca-certificates
+#curl -fsSL https://get.docker.com -o get-docker.sh
+#bash get-docker.sh
+
+# Add Docker's official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+sudo apt update
+
+
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
 sudo dpkg -i docker-desktop-amd64.deb
 sudo apt --fix-broken install -y
