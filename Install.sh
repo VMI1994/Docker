@@ -1,8 +1,13 @@
 #!/bin/bash
 
 clear
-echo "Installing dependencies"
+echo "Updating your system"
+sleep 1
+sudo apt update && sudo apt upgrade -yqq
+clear
 
+echo "Installing dependencies"
+sleep 1
 # Install deps
 sudo apt install -y curl wget apt-utils
 
