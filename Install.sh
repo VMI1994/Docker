@@ -6,7 +6,7 @@ echo "Press enter to begin or ctrl+c to exit"
 read junk
 
 # Install curl
-sudo apt install -y curl neofetch
+sudo apt install -y curl neofetch wget apt-utils
 
 # Which docker to install
 clear
@@ -20,7 +20,10 @@ then
     sleep 2
     curl -fsSL https://get.docker.com -o get-docker.sh
     bash get-docker.sh
-else
+fi
+
+if [ $? == 0 ]
+then
     sudo apt install -y wget
     wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
     sudo apt install -y ./docker-desktop-amd64.deb
