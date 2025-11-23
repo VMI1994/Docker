@@ -1,9 +1,8 @@
 #!/bin/bash
 
 clear
+# Deps
 sudo apt install -y curl wget ca-certificates
-#curl -fsSL https://get.docker.com -o get-docker.sh
-#bash get-docker.sh
 
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
