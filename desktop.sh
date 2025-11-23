@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-sudo apt install -y curl qemu*
+sudo apt install -y curl qemu-system-x86_64 qemu-system-arm64
 curl -fsSL https://get.docker.com -o get-docker.sh
 bash get-docker.sh
 sudo apt install -y wget
