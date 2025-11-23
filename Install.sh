@@ -11,7 +11,7 @@ clear
 echo "1. Headless docker for command line only"
 echo "2. Docker Desktop for GUI enviroments"
 read choice
-if [ $choice = "1"
+if [ $choice = "1" ]
 then
     echo "Headless"
     exit
