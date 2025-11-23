@@ -14,7 +14,6 @@ read choice
 if [ $choice = "1" ]
 then
     bash headless.sh
-    echo "Headless"
     exit
 elif [ $choice = "2" ]
 then
