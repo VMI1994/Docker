@@ -25,7 +25,6 @@ sudo dpkg -i docker-desktop-amd64.deb
 sudo apt --fix-broken install -y
 sudo rm /etc/xdg/systemd/user/docker-desktop.service
 sudo systemctl --user enable docker-desktop
-sudo docker context use desktop-linux
 sudo usermod -aG docker $USER
 
 # Check install
