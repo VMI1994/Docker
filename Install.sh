@@ -3,7 +3,7 @@
 clear
 echo "Updating your system"
 sleep 1
-sudo apt update && sudo apt upgrade -yqq
+sudo apt update
 clear
 
 echo "Installing dependencies"
