@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-sudo apt install -y curl wget qemu-system*
+sudo apt install -y curl wget qemu-system* pass uidmap docker-ce-cli
 #curl -fsSL https://get.docker.com -o get-docker.sh
 #bash get-docker.sh
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
@@ -9,6 +9,7 @@ sudo dpkg -i docker-desktop-amd64.deb
 sudo rm /etc/xdg/systemd/user/docker-desktop.service
 sudo apt --fix-broken install -y
 sudo systemctl --user enable docker-desktop
+sudo docker context use desktop-linux
 clear
 echo "start Docker desktop and wait for startup to complete before hitting enter to continue"
 read pause
