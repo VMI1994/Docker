@@ -1,16 +1,25 @@
 #!/bin/bash
 
 clear
-echo "This script will install docker, portainer and watchtower"
-echo "Press enter to begin or ctrl+c to exit"
-read junk
+echo "Installing dependencies"
 
-# Install curl
-sudo apt install -y curl neofetch wget apt-utils
+# Install deps
+sudo apt install -y curl wget apt-utils
 
 # Which docker to install
 clear
-neofetch | grep DE
+echo "1. Headless docker for command line only"
+echo "2. Docker Desktop for GUI enviroments"
+read choice
+if [ $choice = "1"
+then
+    echo "Headless"
+    exit
+elif [ $choice = "2" ]
+then
+    echo "Desktop"
+    exit
+fi
 
 # Install Docker
 if [ $? == 1 ]
