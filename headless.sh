@@ -33,7 +33,7 @@ if [ $option == "y" ]
 then
     sudo docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
     sudo docker exec -it open-webui ollama pull gemma3:1b
-    clear && echo "OpenWebUI is available at http://127.0.0.1:3000"
+    clear && echo "OpenWebUI is available at http://$(hostname -I | cut -d ' ' -f1):3000"
 fi
 
 # Check Containers
