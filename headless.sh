@@ -54,5 +54,7 @@ then
 else
   echo "Docker Install Failed"
 fi
+
+echo "Go to https://$(hostname -I | cut -d ' ' -f1):9443 to complete portainer setup"
 sleep 2
 exit
