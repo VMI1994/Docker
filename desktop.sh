@@ -20,7 +20,6 @@ sudo docker volume create portainer_data
 sudo docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 clear
 sudo docker run  -d -v /var/run/docker.sock:/var/run/docker.sock --name update-containers nickfedor/watchtower
-sudo firefox https://$(hostname -I | cut -d ' ' -f1):9443
 
 # Option to install open-webui and ollama
 clear
@@ -43,4 +42,7 @@ else
   echo "Docker Install Failed"
 fi
 sleep 2
+
+firefox https://$(hostname -I | cut -d ' ' -f1):9443 &
+
 exit
