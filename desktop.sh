@@ -14,6 +14,24 @@ sudo rm /etc/xdg/systemd/user/docker-desktop.service
 sudo systemctl --user enable docker-desktop
 sudo usermod -aG docker $USER
 
+echo "Install portainer and watchtower"
+sleep 2
+sudo docker volume create portainer_data
+sudo docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+clear
+sudo docker run  -d -v /var/run/docker.sock:/var/run/docker.sock --name watchtower nickfedor/watchtower
+
+# Option to install open-webui and ollama
+clear
+echo "Do you want to install Artificial Intelligence (y/N)"
+read option
+if [ $option == "y" ]
+then
+    sudo docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
+    sudo docker exec -it open-webui ollama pull gemma3:1b
+    clear && "OpenWebUI is available at http://127.0.0.1:3000"
+fi
+
 # Check install
 clear 
 which docker > /dev/null
