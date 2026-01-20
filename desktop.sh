@@ -41,6 +41,4 @@ else
 fi
 sleep 2
 
-firefox https://$(hostname -I | cut -d ' ' -f1):9443 &
-
 exit
