@@ -18,12 +18,9 @@ sudo usermod -aG docker $USER
 
 # Install portainer and watchtower
 clear
-echo "Install portainer and watchtower"
+echo "Install Dockhand"
 sleep 2
-sudo docker volume create portainer_data
-sudo docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-clear
-sudo docker run  -d -v /var/run/docker.sock:/var/run/docker.sock --name upgrade-containers nickfedor/watchtower --run-once
+sudo docker run -d --name dockhand --restart unless-stopped -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v dockhand_data:/app/data fnsys/dockhand:latest
 
 # Option to install open-webui and ollama
 clear
@@ -55,6 +52,4 @@ else
   echo "Docker Install Failed"
 fi
 
-echo "Go to https://$(hostname -I | cut -d ' ' -f1):9443 to complete portainer setup"
-sleep 2
 exit
